@@ -1,4 +1,4 @@
-name: Java/Maven CI + SAST with SonarCloud
+name: SonarCloud
 on:
   push:
     branches: [ main ]
