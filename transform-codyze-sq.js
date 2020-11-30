@@ -2,13 +2,13 @@
 
 const fs = require('fs');
 
-let issues = [];
+const issues = [];
 
 console.log('begin transform Codyze to SQ format');
 
 fs.readFile('findings.json', (err, data) => {
     if (err) throw err;
-    let findings = JSON.parse(data);
+    const findings = JSON.parse(data);
 
     findings.forEach(handleFinding);
 
@@ -17,17 +17,13 @@ fs.readFile('findings.json', (err, data) => {
     }
     var sqFormat = JSON.stringify(allIssues);
 
-    fs.writeFile('sq.json', sqFormat, (err) => {
-        if (err) {
-            throw err;
-        }
+    fs.writeFile('sq.json', sqFormat, (eWrite) => {
+        if (eWrite) throw eWrite;
     });
-
-    //console.log(allIssues);
 });
 
 function handleFinding(finding, index, array) {
-    let issueMessage = finding.onfailIdentifier + " " + finding.logMsg;
+    const issueMessage = finding.onfailIdentifier + " " + finding.logMsg;
 
     var issue = {
         engineId: "Codyze",
@@ -45,7 +41,6 @@ function handleFinding(finding, index, array) {
             }
         }
     };
-    //console.log(issue);
     issues.push(issue);
 }
 
